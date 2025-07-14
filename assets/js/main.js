@@ -1,5 +1,3 @@
-gsap.registerPlugin(MorphSVGPlugin);
-
 const {
   gsap,
   gsap: { to, timeline, set, delayedCall },
@@ -116,9 +114,25 @@ const BLINK = eyes => {
 };
 
 const FROSTING_TL = () =>
-  gsap.timeline().
+  timeline().
   to(
-    '.cake__frosting--start use',
+    '#frosting',
+    {
+      scaleX: 1.015,
+      duration: 0.25
+    },
+    0).
+
+  to(
+    '#frosting',
+    {
+      scaleY: 1,
+      duration: 1
+    },
+    0).
+
+  to(
+    '#frosting',
     {
       duration: 1,
       morphSVG: '.cake__frosting--end'
@@ -126,10 +140,10 @@ const FROSTING_TL = () =>
     0);
 
 const SPRINKLES_TL = () =>
-  gsap.timeline().to('.cake__sprinkle', { scale: 1, duration: 0.06, stagger: 0.02 });
+  timeline().to('.cake__sprinkle', { scale: 1, duration: 0.06, stagger: 0.02 });
 
 const SPIN_TL = () =>
-  gsap.timeline().
+  timeline().
   set('.cake__frosting-patch', { display: 'block' }).
   to(
     ['.cake__frosting--duplicate', '.cake__sprinkles--duplicate'],
@@ -144,7 +158,7 @@ const SPIN_TL = () =>
   to('.cake__face', { duration: 1, x: -48.82 }, 0);
 
 const flickerSpeed = 0.1;
-const FLICKER_TL = gsap.timeline({ paused: true }).
+const FLICKER_TL = timeline({ paused: true }).
   to('.candle__flame-outer', {
     duration: flickerSpeed,
     repeat: -1,
@@ -162,7 +176,7 @@ const FLICKER_TL = gsap.timeline({ paused: true }).
     0);
 
 const SHAKE_TL = () =>
-  gsap.timeline({ delay: 0.5 }).
+  timeline({ delay: 0.5 }).
   set('.cake__face', { display: 'none' }).
   set('.cake__face--straining', { display: 'block' }).
   to(
@@ -198,7 +212,7 @@ const SHAKE_TL = () =>
     0.2);
 
 const FLAME_TL = () =>
-  gsap.timeline({}).
+  timeline({}).
   to('.cake__candle', { '--flame': 1, stagger: 0.2, duration: 0.1 }).
   to('body', { '--flame': 1, '--lightness': 5, duration: 0.2, delay: 0.2 });
 
@@ -252,8 +266,8 @@ const RESET = () => {
   set('.birthday-button', { scale: 0.6, x: 0, y: 0 });
   
   set('.cake__frosting--end', { opacity: 0 });
+  set('#frosting', { transformOrigin: '50% 10%', scaleX: 0, scaleY: 0 });
   set('.cake__frosting-patch', { display: 'none' });
-  set('.cake__frosting--start use', { transformOrigin: '50% 10%', scaleX: 0, scaleY: 0 });
   set(['.cake__frosting--duplicate', '.cake__sprinkles--duplicate'], { x: -65 });
   set('.cake__face', { x: -110 });
   set('.cake__face--straining', { display: 'none' });
@@ -267,7 +281,7 @@ function playInitialAnimation() {
   BTN.setAttribute('disabled', true);
   SOUNDS.ON.play();
   launchConfetti(); // PANGGIL FUNGSI CONFETTI DI SINI
-  const initialTL = gsap.timeline({
+  const initialTL = timeline({
     onComplete: () => {
       to(BLOW_BTN_WRAPPER, { display: 'block', duration: 0.1 });
       SOUNDS.TUNE.play();
@@ -365,23 +379,3 @@ RESET();
 BLINK(EYES);
 SOUNDS.TUNE.loop = true;
 
-
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  const volumeToggle = document.getElementById('volume');
-  
-  // Setel semua suara ke volume 0 jika checkbox tidak dicentang
-  const setMuteState = (muted) => {
-    for (const sound in SOUNDS) {
-      SOUNDS[sound].muted = muted;
-    }
-  };
-
-  // Inisialisasi state mute berdasarkan checkbox
-  setMuteState(volumeToggle.checked);
-
-  // Tambahkan event listener untuk mengubah state mute
-  volumeToggle.addEventListener('change', (e) => {
-    setMuteState(e.target.checked);
-  });
-});
