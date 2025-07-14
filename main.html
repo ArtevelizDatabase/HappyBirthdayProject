@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selamat Ulang Tahun Sayang! 💕</title>
+    <meta name="description" content="Website Ucapan Ulang Tahun Spesial untuk Pacar Tersayang" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;700&family=Comic+Neue:wght@300;400;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/hbd.css">
+    <link rel="stylesheet" href="assets/css/puzzle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <audio id="backgroundMusic" loop autoplay>
+        <!-- <source src="https://www.bensound.com/bensound-music/bensound-ukulele.mp3" type="audio/mpeg"> -->
+        <source src="assets/sounds/Backsound.mp3" type="audio/mpeg">
+
+        Your browser does not support the audio element.
+    </audio>
+    
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <button id="musicToggleButton" onclick="toggleMusic()" class="music-toggle-btn">🎶</button>
+
+    <div class="page active" id="landing">
+        <div class="container landing-page">
+            <p class="subtitle"> Untuk Cintaku , Aulia 💕</p>
+            <div class="overlap-group">
+            <div class="main-title2">Happy</div>
+            <div class="main-title3">Birthday</div>
+            </div>
+
+            <button class="cute-button" onclick="showAdventureChoice()">
+                Klik Aku, Hehehe✨
+            </button>
+        </div>
+    </div>
+    
+    <div id="adventureModal" class="modal">
+        <div class="modal-content cute-modal-content">
+            <h3 class="win-popup-title">Pilih Petualanganmu! 🤔</h3>
+            <p class="win-popup-message">Mau langsung ke pesan atau main kuis dulu?</p>
+            <div class="adventure-choices">
+                <button class="cute-button" onclick="chooseAdventure('messages')">💌 Baca Pesan Dulu!</button>
+                <button class="cute-button" onclick="chooseAdventure('quiz')">❓ Langsung Kuis Aja!</button>
+            </div>
+            <span class="close-button" onclick="closeAdventureModal()">&times;</span>
+        </div>
+    </div>
+
+
+
+    <div class="page" id="messages">
+        <div class="container">
+            <div class="message-container">
+                <h2 class="page-title">
+                    <span style="color: #536dff;">❤</span> Pesan Khusus Untukmu <span style="color: #536dff;">❤</span>
+                </h2>
+                <div class="message-box-inner scroll-content" id="mainMessageBox">
+                    <p class="to-recipient">Untuk: Pacar Tersayang <span style="color: #536dff;">❤</span></p>
+                    <div id="typedtext" class="main-body-message" style="min-height: 250px;"></div>
+                    <p class="to-recipient">
+                        Dengan cinta,<br>
+                        Pacar yang paling sayang <span style="color: #536dff;">❤</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="quiz">
+        <div class="container">
+            <div class="quiz-container">
+                <h2 class="page-title">🤔 Quiz: Seberapa Kenal Kamu Sama Aku?</h2>
+                <div class="question" id="quizQuestion">Loading...</div>
+                <div class="quiz-options" id="quizOptions"></div>
+                <div style="margin-top: 20px;">
+                    <span style="color: #4894ff; font-weight: 600; font-size: 1.3rem;">Skor: </span>
+                    <span id="quizScore" style="color: #2b53e2; font-weight: 600; font-size: 1.3rem;">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="puzzle">
+        <div class="container">
+            <div class="game-container">
+                <h1>Slide Puzzle 🧩</h1>
+
+                <div class="puzzle-controls">
+                    <div>
+                        <p>Pilih Gambar:</p>
+                        <div id="image-gallery">
+                            </div>
+                    </div>
+                    <div>
+                        <p>Atau Upload Sendiri:</p>
+                         <label for="image-uploader" class="custom-file-upload">Pilih File</label>
+                         <input id="image-uploader" type="file" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="puzzle-area">
+                    <div id="puzzle-board"></div>
+                    <div class="original-image-container">
+                        <h2>Gambar Asli</h2>
+                        <img src="https://picsum.photos/300/300?random=1" id="original-image" alt="Original Puzzle Image">
+                    </div>
+                </div>
+                <button id="restart-button">Mulai Ulang</button>
+                <div id="win-message" class="hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="gallery">
+        <div class="container">
+            <h2 class="page-title">Galeri Kenangan Kita 📸</h2>
+            <div class="photo-gallery" id="photoGallery">
+                </div>
+            <div class="word-cloud-container">
+                <h3 class="page-subtitle">Kamu di Mataku Adalah... ✨</h3>
+                <div id="wordCloud" class="word-cloud"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="gift">
+        <div class="container gift-box-container">
+            <h2 class="page-title">🎁 Hadiah Digital Spesial 🎁</h2>
+            
+            <div class="gift-box" id="giftBox" onclick="openGift()">
+                <span class="emoji">🎁</span>
+                <p>Klik untuk membuka hadiah!</p>
+            </div>
+
+            <div class="digital-gifts-list" id="digitalGiftsList">
+                <p class="page-subtitle">✨ Silahkan Pilih Yang ✨</p>
+                <button class="gift-item" onclick="handleGiftItemClick('Voucher Date Romantis')">
+                    <span class="icon">💖</span> Voucher Date Romantis
+                </button>
+                <button class="gift-item" onclick="handleGiftItemClick('Playlist Lagu Favorit Kita')">
+                    <span class="icon">🎵</span> Playlist Lagu Favorit Kita
+                </button>
+                <div class="virtual-flower-delivery" id="flowerDelivery">
+                    <img src="assets/images/image2.gif" alt="Virtual Flower" class="flower-img" style="display:none;">
+                    <p class="flower-message" style="display:none;">Ini bunga virtual dariku, seindah senyummu! 🌹</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="countdown">
+        <div class="container">
+            <div class="message-container">
+                <h2 class="page-title">Berapa Lama Kita Bersama 🥰</h2>
+                    <p class="message-text" style="text-align: center;">How Long we've been Together?💕</p>
+               <div class="countdown-container">
+                    <div class="countdown-item">
+                        <span id="months" class="countdown-number">0</span>
+                        <span class="countdown-label">Bulan</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="days" class="countdown-number">0</span>
+                        <span class="countdown-label">Hari</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="hours" class="countdown-number">0</span>
+                        <span class="countdown-label">Jam</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes" class="countdown-number">0</span>
+                        <span class="countdown-label">Menit</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="seconds" class="countdown-number">0</span>
+                        <span class="countdown-label">Detik</span>
+                    </div>
+                </div>
+                <p style="color: #69b2ff; font-weight: 600; margin-top: 20px; font-size: 1.2rem; text-align: center;">
+                    ...and still counting 🥰
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="final">
+        <div class="container">
+            <div class="message-container final-message">
+                <h2 class="page-title">💝 Pesan Terakhir</h2>
+                <div class="big-heart" id="finalBigHeart">💖</div>
+                <p class="message-text">
+                    Happy birthday lagi sayang! Semoga panjang umur, sehat selalu, 
+                    makin cantik (udah cantik banget sih), dan yang paling penting... 
+                    jangan lupa sama aku ya! 😘
+                </p>
+                <div class="container">
+                    <button class="cute-button" onclick="activateMagicMirror()">
+                        Klik Aku! Ada Kejutan Lagi! ✨
+                    </button>
+                    <p class="magic-mirror-message" id="magicMirrorText" style="display:none;">
+                        Kamu adalah yang tercantik di dunia ini, cintaku! 💖
+                    </p>
+                    <a href="https://wa.me/6289618203010?text=Makasih%20sayang%20udah%20bikin%20website%20lucu%20banget!%20Love%20you%20too!%20" 
+                    class="whatsapp-btn" target="_blank" rel="noopener">
+                        📱 Balas ke WhatsApp Dong!
+                    </a>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="nav-btn active" onclick="showPage('landing', this)">🏠</button>
+        <button class="nav-btn" onclick="showPage('messages', this)">💌 Pesanku</button>
+        <button class="nav-btn" onclick="showPage('quiz', this)">❓Quiz Dadakan</button>
+        <button class="nav-btn" onclick="showPage('gallery', this)">📸 Galeri Foto</button>
+        <!-- <button class="nav-btn" onclick="showPage('gift', this)">🎁 Hadiah Digital</button> -->
+        <button class="nav-btn" onclick="showPage('countdown', this)">⏰ Waktu</button>
+        <button class="nav-btn" onclick="showPage('puzzle', this)">🧩 Kuis Puzzle</button>
+    </div>
+
+    <div id="galleryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-image" id="modalImage"></div>
+            <p class="modal-caption" id="modalCaption"></p>
+            <div class="modal-navigation">
+                <button class="modal-nav-button" id="prevImageBtn">&#10094;</button>
+                <button class="modal-nav-button" id="nextImageBtn">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="winPopup" class="modal">
+        <div class="modal-content win-popup-content">
+            <span class="close-button" onclick="closeWinPopup()">&times;</span>
+            <h3 class="win-popup-title">🎉 YAY, Kamu Berhasil! 🎉</h3>
+            <p class="win-popup-message">Selamat sayang, kamu menangkap semua cintaku! Kamu memang yang terbaik! 🥰</p>
+            <button class="cute-button" onclick="closeWinPopup()">Oke, Gemes! 💕</button>
+        </div>
+    </div>
+
+    <script src="assets/js/hbd.js"></script>
+    <script src="assets/js/puzzle.js"></script>
+</body>
+</html>
