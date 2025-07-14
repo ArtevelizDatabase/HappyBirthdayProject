@@ -120,22 +120,6 @@ const FROSTING_TL = () =>
   to(
     '.cake__frosting--start use',
     {
-      scaleX: 1.015,
-      duration: 0.25
-    },
-    0).
-
-  to(
-    '.cake__frosting--start use',
-    {
-      scaleY: 1,
-      duration: 1
-    },
-    0).
-
-  to(
-    '.cake__frosting--start use',
-    {
       duration: 1,
       morphSVG: '.cake__frosting--end'
     },
@@ -269,7 +253,7 @@ const RESET = () => {
   
   set('.cake__frosting--end', { opacity: 0 });
   set('.cake__frosting-patch', { display: 'none' });
-  set('.cake__frosting--start use', { transformOrigin: '50% 10%', scaleX: 0, scaleY: 0 });
+  set('.cake__frosting--start use', { transformOrigin: '50% 10%', scaleX: 1, scaleY: 1 });
   set(['.cake__frosting--duplicate', '.cake__sprinkles--duplicate'], { x: -65 });
   set('.cake__face', { x: -110 });
   set('.cake__face--straining', { display: 'none' });
