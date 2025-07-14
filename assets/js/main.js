@@ -1,8 +1,6 @@
-const {
-  gsap,
-  gsap: { to, timeline, set, delayedCall },
-  Splitting } =
-window;
+const gsap = window.gsap;
+const Splitting = window.Splitting;
+const { to, timeline, set, delayedCall } = gsap;
 
 // === KODE CONFETTI DARI ANDA (DIBUNGKUS DALAM FUNGSI) ===
 function launchConfetti() {
@@ -362,6 +360,7 @@ function blowOutCandles() {
 
 // === EVENT LISTENERS ===
 BTN.addEventListener('click', () => {
+  console.log('Button clicked!'); // Added for debugging
   if (animationHasPlayed) {
     RESET();
   } else {
