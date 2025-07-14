@@ -118,7 +118,7 @@ const BLINK = eyes => {
 const FROSTING_TL = () =>
   gsap.timeline().
   to(
-    '#frosting',
+    '.cake__frosting--start',
     {
       scaleX: 1.015,
       duration: 0.25
@@ -126,7 +126,7 @@ const FROSTING_TL = () =>
     0).
 
   to(
-    '#frosting',
+    '.cake__frosting--start',
     {
       scaleY: 1,
       duration: 1
@@ -134,7 +134,7 @@ const FROSTING_TL = () =>
     0).
 
   to(
-    '#frosting',
+    '.cake__frosting--start use',
     {
       duration: 1,
       morphSVG: '.cake__frosting--end'
