@@ -101,7 +101,7 @@ body {
   transform: translate(-50%, 0);
   width: 289.5px;
   display: none;
-  pointer-events: none; /* Supaya tidak menghalangi klik */
+  
 }
 .cake__eye-body {
   fill: var(--stroke);
