@@ -118,7 +118,7 @@ const BLINK = eyes => {
 const FROSTING_TL = () =>
   gsap.timeline().
   to(
-    '.cake__frosting--start',
+    '.cake__frosting--start use',
     {
       scaleX: 1.015,
       duration: 0.25
@@ -126,7 +126,7 @@ const FROSTING_TL = () =>
     0).
 
   to(
-    '.cake__frosting--start',
+    '.cake__frosting--start use',
     {
       scaleY: 1,
       duration: 1
@@ -268,8 +268,8 @@ const RESET = () => {
   set('.birthday-button', { scale: 0.6, x: 0, y: 0 });
   
   set('.cake__frosting--end', { opacity: 0 });
-  set('#frosting', { transformOrigin: '50% 10%', scaleX: 0, scaleY: 0 });
   set('.cake__frosting-patch', { display: 'none' });
+  set('.cake__frosting--start use', { transformOrigin: '50% 10%', scaleX: 0, scaleY: 0 });
   set(['.cake__frosting--duplicate', '.cake__sprinkles--duplicate'], { x: -65 });
   set('.cake__face', { x: -110 });
   set('.cake__face--straining', { display: 'none' });
